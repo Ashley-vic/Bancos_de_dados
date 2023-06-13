@@ -1,0 +1,28 @@
+--Questão 2. a)
+
+CREATE TABLE historico(
+        matricula_aluno INTEGER NOT NULL,
+        cod_disciplina INTEGER NOT NULL,
+        semestre INT NOT NULL,
+        ano INT NOT NULL,
+        nota NUMERIC NOT NULL,
+
+        PRIMARY KEY (matricula_aluno, cod_disciplina),
+        FOREIGN KEY (cod_disciplina) REFERENCES disciplina (cod_disciplina),
+        FOREIGN KEY (matricula_aluno) REFERENCES aluno (matricula)
+);
+
+--Questão 2. b)
+
+INSERT INTO public.aluno VALUES (56, 876323, 'Igor', 7), (50, 323564, 'Karina', 8);
+INSERT INTO public.disciplina VALUES (1, 'historia', 7), (2, 'inglês', 8);
+INSERT INTO public.livro VALUES (5, 7654321, 'Sapiens', 'saraiva', 'Noah Harari'), (6, 1234567, 'Game of thrones', 'saraiva', 'George R.R');
+INSERT INTO public.livro_adotado VALUES (1, 5), (2, 6);
+INSERT INTO public.aluno VALUES (876323, 1, 1, 2023, 10), (323564, 2, 1, 2023, 10);
+
+--Questão 2. c)
+
+DELETE FROM aluno WHERE matricula = 56;
+
+-- Este comando gera um erro pois a matricula é referenciada na tabela histórico, portanto ela viola 
+-- restrição de chave estrangeira.

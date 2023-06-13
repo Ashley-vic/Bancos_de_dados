@@ -1,0 +1,27 @@
+--Questão 3. a) 
+
+SELECT nome_autor 
+FROM livro L
+WHERE L.nome_autor = '%A'
+
+--Questão 3. b)
+
+SELECT aluno.nome, disciplina.cod_disciplina
+FROM public.aluno
+INNER JOIN public.historico ON aluno.matricula = historico.matricula_aluno
+INNER JOIN public.disciplina ON historico.cod_disciplina = disciplina.cod_disciplina;
+
+--Questão 3. c)
+
+SELECT livro.titulo, COUNT(livro_adotado.cod_disciplina) AS qtd_disciplinas
+FROM public.livro
+LEFT JOIN public.livro_adotado ON livro.cod = livro_adotado.cod_livro
+GROUP BY livro.cod, livro.titulo;
+
+--Qestão 3. d)
+
+SELECT cod_disciplina
+FROM public.historico
+WHERE nota > 9
+GROUP BY cod_disciplina
+HAVING COUNT(DISTINCT matricula_aluno) > 10;
